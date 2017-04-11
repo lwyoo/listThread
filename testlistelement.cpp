@@ -25,7 +25,7 @@ TestListElement::TestListElement(const int count, const QString text1, const QSt
     qDebug() << "count + text + icon";
 }
 
-int TestListElement::getCount()
+int TestListElement::getCount() const
 {
     return m_count;
 }
@@ -38,7 +38,7 @@ void TestListElement::setCount(int nValue)
     }
 }
 
-QString TestListElement::getText1()
+QString TestListElement::getText1() const
 {
     return m_text1;
 }
@@ -51,7 +51,7 @@ void TestListElement::setText1(QString nValue)
     }
 }
 
-QString TestListElement::getText2()
+QString TestListElement::getText2() const
 {
     return m_text1;
 }
@@ -64,7 +64,7 @@ void TestListElement::setText2(QString nValue)
     }
 }
 
-QString TestListElement::getText3()
+QString TestListElement::getText3() const
 {
     return m_text1;
 }
@@ -77,7 +77,7 @@ void TestListElement::setText3(QString nValue)
     }
 }
 
-QString TestListElement::getIconUrl()
+QString TestListElement::getIconUrl() const
 {
     return m_iconUrl;
 }

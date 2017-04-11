@@ -117,6 +117,13 @@ bool TestListModel::setData(const QModelIndex &index, const QVariant &value, int
     }
 }
 
+void TestListModel::listClean()
+{
+    beginResetModel();
+    mList.clear();
+    endResetModel();
+}
+
 bool TestListModel::indexIsValid(const QModelIndex &index) const
 {
     return index.isValid() && (index.row() < rowCount() ) && (index.row() > -1);
@@ -134,4 +141,20 @@ void TestListModel::resetRouteList(const QList<TestListElement> &item)
     beginResetModel();
     mList = item;
     endResetModel();
+}
+
+bool TestListModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    if (0 < count)
+    {
+        beginRemoveRows(parent, row, row + count - 1);
+        while (count--) mList.removeAt(row);
+        endRemoveRows();
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

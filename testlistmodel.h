@@ -17,7 +17,7 @@ public:
     };
 
 
-    TestListModel(QObject * parent );
+    TestListModel(QObject * parent = 0);
 
     QHash<int , QByteArray> roleNames() const;
 
@@ -32,9 +32,13 @@ public:
     Q_INVOKABLE QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
+    void listClean();
+
     Q_INVOKABLE bool indexIsValid(const QModelIndex & index) const;
+
     void addItem(const TestListElement &item);
     void resetRouteList(const QList<TestListElement> & item);
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
 
 
 private:

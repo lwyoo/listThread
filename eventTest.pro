@@ -6,7 +6,8 @@ CONFIG += c++11
 SOURCES += main.cpp \
     keypress.cpp \
     testlistmodel.cpp \
-    testlistelement.cpp
+    testlistelement.cpp \
+    listmodelcontrol.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,4 +36,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     keypress.h \
     testlistmodel.h \
-    testlistelement.h
+    testlistelement.h \
+    listmodelcontrol.h
