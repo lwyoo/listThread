@@ -1,7 +1,7 @@
 #include "listmodelcontrol.h"
 #include "testlistmodel.h"
 #include <QDebug>
-#include <QQmlContext>
+#include <QApplication>
 
 ListModelControl * listModelControlInstance = NULL;
 
@@ -31,6 +31,7 @@ void ListModelControl::listInit()
                 .arg(Q_FUNC_INFO)
                 .arg(mList->rowCount());
 
+
     if (mList->rowCount() != 0)
     {
 
@@ -40,8 +41,7 @@ void ListModelControl::listInit()
     {
 
     }
-//    QQmlContext * context = mQmlEngine->rootContext();
-//    context->setContextProperty("TestListModel", mList);
+    addListModel(100);
 
 }
 
@@ -91,6 +91,14 @@ void ListModelControl::removListModel(const int startOffSet, const int endOffSet
 void ListModelControl::allRemoveListModel()
 {
     mList->listClean();
+}
+
+void ListModelControl::setRootContext(QQmlContext *context)
+{
+//    QQmlContext * context = mQmlEngine->rootContext();
+    context->setContextProperty("TestListModel", mList);
+    context->setContextProperty("TestList", this);
+
 }
 
 

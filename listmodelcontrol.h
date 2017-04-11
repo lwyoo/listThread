@@ -1,10 +1,9 @@
 #ifndef LISTMODELCONTROL_H
 #define LISTMODELCONTROL_H
 #include <QObject>
-
+#include <QQmlContext>
 
 class TestListModel;
-class QQmlEngine;
 class ListModelControl : public QObject
 {
     Q_OBJECT
@@ -25,6 +24,7 @@ public:
     // 리스트 전체 삭제
     Q_INVOKABLE void allRemoveListModel();
 
+    void setRootContext(QQmlContext * context);
 
 
 private:

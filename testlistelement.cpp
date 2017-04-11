@@ -4,7 +4,7 @@ TestListElement::TestListElement(const int count, const QString text1)
     :  m_count(count)
     , m_text1(text1)
 {
-    qDebug() << "count + text";
+//    qDebug() << "count + text";
 
 }
 
@@ -14,7 +14,7 @@ TestListElement::TestListElement(const int count, const QString text1, const QSt
     , m_text2(text2)
     , m_text3(text3)
 {
-    qDebug() << "count + text + text + text";
+//    qDebug() << "count + text + text + text";
 }
 
 TestListElement::TestListElement(const int count, const QString text1, const QString iconUrl)
@@ -22,7 +22,7 @@ TestListElement::TestListElement(const int count, const QString text1, const QSt
     , m_text1(text1)
     , m_iconUrl(iconUrl)
 {
-    qDebug() << "count + text + icon";
+//    qDebug() << "count + text + icon";
 }
 
 int TestListElement::getCount() const

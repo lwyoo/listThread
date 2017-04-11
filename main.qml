@@ -3,19 +3,11 @@ import QtQuick.Window 2.2
 
 Window {
     visible: true
-    width: 640
+    width: 1000
     height: 480
     title: qsTr("Hello World")
-
-    //    MainForm {
-    //        anchors.fill: parent
-    //        mouseArea.onClicked: {
-    //            console.log(qsTr('Clicked on background. Text: "' + textEdit.text + '"'))
-    //        }
-    //    }
-
-
-
+    property int testValue : 0
+    property int makeCount: 100000
     //list view
     ListView
     {
@@ -23,7 +15,7 @@ Window {
         width: 500
         height: 400
         delegate:testDelegate
-        model:testListModel
+        model:TestListModel
 
     }
 
@@ -33,9 +25,23 @@ Window {
             height: 90
             width: 100
             Text{
-                text:name
+                x: 0
+                text:listCount
+            }
+            Text{
+                x: 100
+                text:listText1
+            }
+            Text{
+                x: 200
+                text:listText2
+            }
+            Text{
+                x: 300
+                text:listText3
             }
             Rectangle{
+
                 anchors.fill: parent
                 color: "red"
                 opacity: 0.1 * index
@@ -63,7 +69,66 @@ Window {
         }
     }
 
+    Rectangle{
+        x: 400
+        y: 200
+        width: 100
+        height: 100
+        Text{
+            text:"All Clear"
+            color: "black"
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                TestList.allRemoveListModel()
+            }
+        }
+    }
 
+    Rectangle{
+        x: 600
+        y: 200
+        width: 100
+        height: 100
+        Text{
+            text:"add Item (+1000)"
+            color: "black"
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                TestList.addListModel(makeCount)
+            }
+        }
+    }
+
+    Rectangle{
+        width: 100
+        height: 100
+        color: "blue"
+        x: 500
+        y: 300
+        transform: Rotation {
+            origin.x: 50;
+            origin.y: 50;
+            angle: testValue
+        }
+    }
+
+    Timer
+    {
+        interval: 10
+        running : true
+        repeat: true
+        onTriggered:{
+            testValue++
+            if (testValue == 359)
+            {
+                testValue = 0
+            }
+        }
+    }
 
 
 

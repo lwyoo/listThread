@@ -19,7 +19,7 @@ QHash<int, QByteArray> TestListModel::roleNames() const
 
 QModelIndex TestListModel::index(int row, int column, const QModelIndex &parent) const
 {
-    qDebug() << "TestListModel index";
+//    qDebug() << "TestListModel index";
     Q_UNUSED(parent)
     return createIndex(row, column, quintptr(0));
 }
@@ -31,7 +31,7 @@ QModelIndex TestListModel::parent(const QModelIndex &child) const
 
 int TestListModel::rowCount(const QModelIndex &parent) const
 {
-    qDebug() << "TestListModel rowCount";
+//    qDebug() << "TestListModel rowCount";
     return mList.count();
 }
 
@@ -47,7 +47,7 @@ bool TestListModel::hasChildren(const QModelIndex &parent) const
 
 QVariant TestListModel::data(const QModelIndex &index, int role) const
 {
-    qDebug() << "TestListModel data";
+//    qDebug() << "TestListModel data";
 
     if (!indexIsValid(index))
     {

@@ -6,9 +6,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    ListModelControl::instance()->setRootContext(engine.rootContext());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    ListModelControl::instance();
+
 
 
     return app.exec();
