@@ -39,7 +39,7 @@ public:
     void addItem(const TestListElement &item);
     void resetRouteList(const QList<TestListElement> & item);
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
-
+QList<TestListElement> getList();
 
 private:
     QList<TestListElement> mList;

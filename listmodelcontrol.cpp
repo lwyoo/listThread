@@ -8,13 +8,11 @@ ListModelControl * listModelControlInstance = NULL;
 
 
 ListModelControl::ListModelControl(QObject *parent)
+    : QObject(parent)
+    , mList(new TestListModel)
+    , mQmlEngine(NULL)
+    , mThread(new TestThread(this))
 {
-    mList = new TestListModel;
-    mThread = new TestThread(this);
-
-//    connect(mThread , SIGNAL ( signalFinish(int) ) , this , SLOT ( receivedFinish(int) ));
-    //posrevent 가 오면 처리
-
     listInit();
 }
 
@@ -58,7 +56,7 @@ void ListModelControl::addListModel(const int nValue)
 
     //thread 돌리기
 
-    for (int i = 0 ; i < nValue ; i++)
+    for (int i = 0 ; i < 2 ; i++)
     {
         mList->addItem(TestListElement(999 , "add Item"));
     }
@@ -111,13 +109,11 @@ void ListModelControl::addListModelThread(const int nValue)
 
     mThread->start();
     qDebug() << QString (" add List Model Complete [%1] ").arg(Q_FUNC_INFO);
-//    mList->addItem();
 
 }
 
 void ListModelControl::setRootContext(QQmlContext *context)
 {
-//    QQmlContext * context = mQmlEngine->rootContext();
     context->setContextProperty("TestListModel", mList);
     context->setContextProperty("TestList", this);
 
@@ -127,29 +123,19 @@ bool ListModelControl::event(QEvent *e)
 {
     switch (e->type())
     {
-    case INIT:
-        mList->listClean();
-        mList = mThread->getModel();
+    case CalculateComplete:
         qDebug() << QString ("[%1] "
-                             "dldyddn INIT [%2]")
+                             "Compolete INIT [%2]")
                     .arg(Q_FUNC_INFO)
                     .arg(mList->rowCount())
                     ;
+        mList->resetRouteList(mThread->getModel()->getList());
 
         break;
     default:
         return QObject::event(e);
     }
 }
-
-//void ListModelControl::receivedFinish(int nValue)
-//{
-//    qDebug() << QString ("[%1] "
-//                         "nValue [%2]")
-//                .arg(Q_FUNC_INFO)
-//                .arg(nValue)
-//                ;
-//}
 
 
 

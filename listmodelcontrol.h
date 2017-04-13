@@ -13,7 +13,7 @@ private:
     ListModelControl(QObject * parent = 0);
 
 public:
-    static const QEvent::Type INIT = QEvent::Type(QEvent::User + 1);
+    static const QEvent::Type CalculateComplete = QEvent::Type(QEvent::User + 1);
     static ListModelControl * instance();
 
 public:
@@ -36,9 +36,9 @@ public:
 
 
 private:
-    TestListModel * mList;
-    QQmlEngine* mQmlEngine;
-    TestThread* mThread;
+    TestListModel *  mList;
+    QQmlEngine*     mQmlEngine;
+    TestThread*       mThread;
 
 //public slots:
 //    void receivedFinish(int nValue);

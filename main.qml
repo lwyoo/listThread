@@ -22,7 +22,7 @@ Window {
     Component{
         id: testDelegate
         Item{
-            height: 90
+            height: 30
             width: 100
             Text{
                 x: 0
@@ -44,8 +44,16 @@ Window {
 
                 anchors.fill: parent
                 color: "red"
-                opacity: 0.1 * index
+                opacity: 0.001 * index
             }
+            Image {
+                id: name
+                width: 30
+                height: 30
+                source: listIconUrl
+            }
+
+
         }
     }
 

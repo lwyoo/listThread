@@ -158,3 +158,8 @@ bool TestListModel::removeRows(int row, int count, const QModelIndex &parent)
         return false;
     }
 }
+
+QList<TestListElement> TestListModel::getList()
+{
+    return mList;
+}
