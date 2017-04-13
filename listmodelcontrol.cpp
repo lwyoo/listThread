@@ -2,12 +2,19 @@
 #include "testlistmodel.h"
 #include <QDebug>
 #include <QApplication>
+#include "testthread.h"
 
 ListModelControl * listModelControlInstance = NULL;
+
 
 ListModelControl::ListModelControl(QObject *parent)
 {
     mList = new TestListModel;
+    mThread = new TestThread(this);
+
+//    connect(mThread , SIGNAL ( signalFinish(int) ) , this , SLOT ( receivedFinish(int) ));
+    //posrevent 가 오면 처리
+
     listInit();
 }
 
@@ -49,11 +56,14 @@ void ListModelControl::addListModel(const int nValue)
 {
     //임의의 리스트 항목을 입력 받은 숫자 만큼 추가
 
+    //thread 돌리기
+
     for (int i = 0 ; i < nValue ; i++)
     {
         mList->addItem(TestListElement(999 , "add Item"));
     }
 
+    qDebug() << QString (" add List Model Complete [%1] ").arg(Q_FUNC_INFO);
 //    mList->addItem();
 
 }
@@ -93,6 +103,18 @@ void ListModelControl::allRemoveListModel()
     mList->listClean();
 }
 
+void ListModelControl::addListModelThread(const int nValue)
+{
+    //임의의 리스트 항목을 입력 받은 숫자 만큼 추가
+
+    //thread 돌리기
+
+    mThread->start();
+    qDebug() << QString (" add List Model Complete [%1] ").arg(Q_FUNC_INFO);
+//    mList->addItem();
+
+}
+
 void ListModelControl::setRootContext(QQmlContext *context)
 {
 //    QQmlContext * context = mQmlEngine->rootContext();
@@ -100,6 +122,34 @@ void ListModelControl::setRootContext(QQmlContext *context)
     context->setContextProperty("TestList", this);
 
 }
+
+bool ListModelControl::event(QEvent *e)
+{
+    switch (e->type())
+    {
+    case INIT:
+        mList->listClean();
+        mList = mThread->getModel();
+        qDebug() << QString ("[%1] "
+                             "dldyddn INIT [%2]")
+                    .arg(Q_FUNC_INFO)
+                    .arg(mList->rowCount())
+                    ;
+
+        break;
+    default:
+        return QObject::event(e);
+    }
+}
+
+//void ListModelControl::receivedFinish(int nValue)
+//{
+//    qDebug() << QString ("[%1] "
+//                         "nValue [%2]")
+//                .arg(Q_FUNC_INFO)
+//                .arg(nValue)
+//                ;
+//}
 
 
 

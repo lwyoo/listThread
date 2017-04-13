@@ -98,7 +98,7 @@ Window {
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                TestList.addListModel(makeCount)
+                TestList.addListModelThread(makeCount)
             }
         }
     }

@@ -4,10 +4,10 @@ QT += qml quick widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    keypress.cpp \
     testlistmodel.cpp \
     testlistelement.cpp \
-    listmodelcontrol.cpp
+    listmodelcontrol.cpp \
+    testthread.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,7 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    keypress.h \
     testlistmodel.h \
     testlistelement.h \
-    listmodelcontrol.h
+    listmodelcontrol.h \
+    testthread.h
