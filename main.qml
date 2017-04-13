@@ -82,6 +82,8 @@ Window {
         y: 200
         width: 100
         height: 100
+        opacity: 0.3
+        color:"black"
         Text{
             text:"All Clear"
             color: "black"
@@ -95,18 +97,41 @@ Window {
     }
 
     Rectangle{
-        x: 600
+        x: 500
         y: 200
         width: 100
         height: 100
+        opacity: 0.3
+        color:"gray"
         Text{
-            text:"add Item (+1000)"
+            text:"add Item "
             color: "black"
         }
         MouseArea{
             anchors.fill: parent
             onClicked: {
-                TestList.addListModelThread(makeCount)
+//                TestList.addListModelThread()
+                TestList.addListModel(100000)
+            }
+        }
+    }
+
+    Rectangle{
+        x: 600
+        y: 200
+        width: 100
+        height: 100
+        opacity: 0.3
+        color:"black"
+        Text{
+            text:"add Item (use Thread)"
+            color: "black"
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                TestList.addListModelThread()
+//                TestList.addListModel(100000)
             }
         }
     }
@@ -122,11 +147,12 @@ Window {
             origin.y: 50;
             angle: testValue
         }
+
     }
 
     Timer
     {
-        interval: 10
+        interval: 1
         running : true
         repeat: true
         onTriggered:{

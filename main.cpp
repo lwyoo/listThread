@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     //set thread name
-//    QThread::currentThread()->setObjectName("Main Thread");
-//    qDebug() << Q_FUNC_INFO << QThread::currentThread();
+    QThread::currentThread()->setObjectName("Main Thread");
+    qDebug() << Q_FUNC_INFO << QThread::currentThread();
 
     QQmlApplicationEngine engine;
     ListModelControl::instance()->setRootContext(engine.rootContext());

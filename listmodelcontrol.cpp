@@ -13,6 +13,8 @@ ListModelControl::ListModelControl(QObject *parent)
     , mQmlEngine(NULL)
     , mThread(new TestThread(this))
 {
+    QThread::currentThread()->setObjectName("Main Thread");
+    qDebug() << Q_FUNC_INFO << QThread::currentThread();
     listInit();
 }
 
@@ -39,12 +41,10 @@ void ListModelControl::listInit()
 
     if (mList->rowCount() != 0)
     {
-
         mList->listClean();
     }
     else
     {
-
     }
     addListModel(100);
 
@@ -52,13 +52,13 @@ void ListModelControl::listInit()
 
 void ListModelControl::addListModel(const int nValue)
 {
-    //임의의 리스트 항목을 입력 받은 숫자 만큼 추가
+    //입력 받은 숫자 만큼 추가 임의의 리스트 항목
 
     //thread 돌리기
 
-    for (int i = 0 ; i < 2 ; i++)
+    for (int i = 0 ; i < nValue ; i++)
     {
-        mList->addItem(TestListElement(999 , "add Item"));
+        mList->addItem(TestListElement(i , "add Item"));
     }
 
     qDebug() << QString (" add List Model Complete [%1] ").arg(Q_FUNC_INFO);
@@ -101,15 +101,10 @@ void ListModelControl::allRemoveListModel()
     mList->listClean();
 }
 
-void ListModelControl::addListModelThread(const int nValue)
+void ListModelControl::addListModelThread()
 {
-    //임의의 리스트 항목을 입력 받은 숫자 만큼 추가
-
-    //thread 돌리기
-
+    qDebug() << Q_FUNC_INFO << QThread::currentThread() ;
     mThread->start();
-    qDebug() << QString (" add List Model Complete [%1] ").arg(Q_FUNC_INFO);
-
 }
 
 void ListModelControl::setRootContext(QQmlContext *context)
@@ -125,11 +120,11 @@ bool ListModelControl::event(QEvent *e)
     {
     case CalculateComplete:
         qDebug() << QString ("[%1] "
-                             "Compolete INIT [%2]")
+                             "CalculateComplete")
                     .arg(Q_FUNC_INFO)
-                    .arg(mList->rowCount())
                     ;
-        mList->resetRouteList(mThread->getModel()->getList());
+//        mList->resetList(mThread->getModel()->getList());
+        mList->appendList(mThread->getModel()->getList());
 
         break;
     default:

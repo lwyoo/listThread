@@ -12,6 +12,8 @@ TestThread::TestThread(QObject *parent)
     , mList (new TestListModel)
     , state(ENABLED)
 {
+    this->setObjectName("subThread");
+
     qDebug() << QString ("[%1] "
                          "call construction")
                 .arg(Q_FUNC_INFO)
@@ -34,14 +36,14 @@ TestListModel *TestThread::getModel()
 
 void TestThread::run()
 {
-    //뮤텍스 필요
 
+    qDebug() << Q_FUNC_INFO << QThread::currentThread() ;
     switch(state)
     {
     case ENABLED:
         state = WORKING;
         mList->listClean();
-        for (int i = 0 ; i < 1000000 ; i++)
+        for (int i = 0 ; i < 100000 ; i++)
         {
             mList->addItem(TestListElement(i , "add Item" , "123.jpg"));
         }

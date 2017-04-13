@@ -37,9 +37,12 @@ public:
     Q_INVOKABLE bool indexIsValid(const QModelIndex & index) const;
 
     void addItem(const TestListElement &item);
-    void resetRouteList(const QList<TestListElement> & item);
+    void resetList(const QList<TestListElement> & item);
+    void appendList(const QList<TestListElement> & item);
+
+
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
-QList<TestListElement> getList();
+    QList<TestListElement> getList();
 
 private:
     QList<TestListElement> mList;

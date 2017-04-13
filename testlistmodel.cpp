@@ -1,5 +1,6 @@
 #include "testlistmodel.h"
 #include <QDebug>
+#include <QThread>
 TestListModel::TestListModel(QObject *parent)
 {
     qDebug() << "create TestListModel ";
@@ -131,15 +132,23 @@ bool TestListModel::indexIsValid(const QModelIndex &index) const
 
 void TestListModel::addItem(const TestListElement &item)
 {
+    qDebug() << Q_FUNC_INFO << QThread::currentThread() ;
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     mList.append(item);
     endInsertRows();
 }
 
-void TestListModel::resetRouteList(const QList<TestListElement> &item)
+void TestListModel::resetList(const QList<TestListElement> &item)
 {
     beginResetModel();
     mList = item;
+    endResetModel();
+}
+
+void TestListModel::appendList(const QList<TestListElement> &item)
+{
+    beginResetModel();
+    mList += item;
     endResetModel();
 }
 

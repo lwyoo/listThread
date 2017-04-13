@@ -27,7 +27,7 @@ public:
     // 리스트 전체 삭제
     Q_INVOKABLE void allRemoveListModel();
 
-    Q_INVOKABLE void addListModelThread(const int nValue);
+    Q_INVOKABLE void addListModelThread();
 
 
     void setRootContext(QQmlContext * context);
